@@ -35,7 +35,6 @@ export const addCompany = async (req: Request, res: Response) => {
 
 export const updateCompany = async (req: Request, res: Response) => {
   const { companyName, field, value } = req.body;
-  console.log({ companyName, field, value });
   try {
     const existingCompany = await CompanyModel.findOne({ companyName });
 

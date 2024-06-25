@@ -1,3 +1,4 @@
+import { CompanyData } from "lib/constants";
 import mongoose, { Document, Schema } from "mongoose";
 
 interface IEarningsReport {
@@ -55,11 +56,14 @@ export const CompanyModel = mongoose.model<ICompany>("Company", companySchema);
 export const getCompaniesData = (): Promise<ICompany[]> =>
   CompanyModel.find().exec();
 
-export const addCompany = (companyData: ICompany): Promise<ICompany> =>
+export const addCompany = (companyData: CompanyData): Promise<ICompany> =>
   CompanyModel.create(companyData);
 
-export const updateCompany = (companyData: Partial<ICompany>): Promise<any> =>
-  CompanyModel.updateOne(
-    { companyName: companyData.companyName },
-    companyData
-  ).exec();
+export const updateCompany = (
+  companyName: string,
+  field: string,
+  value: string
+): Promise<any> => {
+  const update = { [field]: value };
+  return CompanyModel.updateOne({ companyName }, update).exec();
+};
