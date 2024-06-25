@@ -14,6 +14,7 @@ export const client = new OpenAI({
 });
 
 const app = express();
+const port = process.env.PORT || 4000;
 
 app.use(cors());
 
@@ -23,8 +24,8 @@ app.use(bodyParser.json());
 
 const server = createServer(app);
 
-server.listen(8080, () => {
-  console.log("Server is running on port 8080");
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 const MONGO_URL = process.env.MONGO_URL || "";
